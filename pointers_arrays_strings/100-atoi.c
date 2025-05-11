@@ -1,24 +1,40 @@
 #include "main.h"
-
+#include <stdio.h>
+#include <limits.h>
 /**
- * _atoi - Converts a string to an integer.
- * @s: The string to be converted.
- *
- * Return: The integer value of the converted string.
- */
+*_atoi - copies n elements of an arr to another
+*@s: pointer to string
+*
+*Return:copies of the str
+*/
+
 int _atoi(char *s)
 {
 int sign = 1;
-unsigned int num = 0;
-do
+int result = 0;
+int started = 0;
+while (*s)
 {
+if (*s == '-' || *s == '+')
+{
+if (started)
+break;
 if (*s == '-')
 sign *= -1;
+}
 else if (*s >= '0' && *s <= '9')
-num = (num * 10) + (*s - '0');
-else if (num > 0)
+{
+int digit = *s - '0';
+if (result > (INT_MAX - digit) / 10)
+return (sign == 1 ? INT_MAX : INT_MIN);
+result = result * 10 + digit;
+started = 1;
+}
+else if (started)
+{
 break;
 }
-while (*s++);
-return (num * sign);
+s++;
+}
+return (result *sign);
 }
