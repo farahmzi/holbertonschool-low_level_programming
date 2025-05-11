@@ -1,22 +1,27 @@
 #include "main.h"
-
 /**
- * _atoi - Converts a string to an integer.
- * @s: The string to be converted.
+ *_strncat - function that concatenates two strings. it will use
+ * at most n bytes from src. src does not need to be null terminated.
+ *@dest: pointer to destination string.
+ *@src: pointer to source string.
+ *@n: number of bytes to be concatenated.
  *
- * Return: The integer value of the converted string.
+ *Return: pointer to destination string.
  */
-int _atoi(char *s)
+char *_strncat(char *dest, char *src, int n)
 {
-int sign = 1;
-unsigned int num = 0;
-do {
-if (*s == '-')
-sign *= -1;
-else if (*s >= '0' && *s <= '9')
-num = (num * 10) + (*s - '0');
-else if (num > 0)
-break;
-} while (*s++);
-return (num * sign);
+int length, j;
+/* j is a counter for  n bytes of src to be concatenated */
+/* length = length of destination string */
+length = 0;
+while (dest[length] != '\0')
+{
+length++;
+}
+for (j = 0; j < n && src[j] != '\0'; j++, length++)
+{
+dest[length] = src[j];
+}
+dest[length] = '\0';
+return (dest);
 }
