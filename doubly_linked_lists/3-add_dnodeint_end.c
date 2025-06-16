@@ -14,7 +14,7 @@ if (new_node == NULL)
 return (NULL);
 new_node->n = n;
 new_node->next = NULL;
-if (*head == NULL) // إذا القائمة فاضية
+if (*head == NULL)
 {
 new_node->prev = NULL;
 *head = new_node;
