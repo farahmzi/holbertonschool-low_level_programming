@@ -1,10 +1,10 @@
 #include "lists.h"
 #include <stdlib.h>
 /**
- * add_dnodeint_end - يضيف عقدة جديدة في نهاية اللائحة
- * @head: عنوان الرأس
- * @n: القيمة المراد إضافتها
- * Return: عنوان العقدة الجديدة أو NULL إذا فشل
+ * add_dnod
+ * @head: عن�
+ * @n: الق
+ * Return: ع�
  */
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
