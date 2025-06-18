@@ -8,7 +8,7 @@
 
 /**
  * close_fd - Closes a file descriptor
- * @fd: file descriptor
+ * @fd: The file descriptor to close
  */
 void close_fd(int fd)
 {
@@ -20,10 +20,10 @@ exit(100);
 }
 
 /**
- * main - Copy contents from one file to another
- * @ac: arg count
- * @av: arg vector
- * Return: 0 on success, error code on failure
+ * main - Copies content of a file to another file
+ * @ac: Argument count
+ * @av: Argument vector
+ * Return: 0 on success, exits with codes on failure
  */
 int main(int ac, char **av)
 {
@@ -44,6 +44,14 @@ dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
 exit(98);
 }
 
+r = read(fd_from, buffer, BUF_SIZE);
+if (r == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
+close_fd(fd_from);
+exit(98);
+}
+
 fd_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 if (fd_to == -1)
 {
@@ -52,8 +60,7 @@ close_fd(fd_from);
 exit(99);
 }
 
-while ((r = read(fd_from, buffer, BUF_SIZE)) > 0)
-{
+do {
 w = write(fd_to, buffer, r);
 if (w == -1 || w != r)
 {
@@ -62,7 +69,7 @@ close_fd(fd_from);
 close_fd(fd_to);
 exit(99);
 }
-}
+} while ((r = read(fd_from, buffer, BUF_SIZE)) > 0);
 
 if (r == -1)
 {
