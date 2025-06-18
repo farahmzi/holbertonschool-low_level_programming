@@ -34,6 +34,14 @@ dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
 exit(98);
 }
 
+r = read(fd_from, buffer, BUF_SIZE);
+if (r == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
+close_fd(fd_from);
+exit(98);
+}
+
 fd_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 if (fd_to == -1)
 {
@@ -42,17 +50,16 @@ close_fd(fd_from);
 exit(99);
 }
 
-while ((r = read(fd_from, buffer, BUF_SIZE)) > 0)
-{
+do {
 w = write(fd_to, buffer, r);
-if (w != r)
+if (w == -1 || w != r)
 {
 dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
 close_fd(fd_from);
 close_fd(fd_to);
 exit(99);
 }
-}
+} while ((r = read(fd_from, buffer, BUF_SIZE)) > 0);
 
 if (r == -1)
 {
@@ -64,7 +71,6 @@ exit(98);
 
 close_fd(fd_from);
 close_fd(fd_to);
-
 return (0);
 }
 
