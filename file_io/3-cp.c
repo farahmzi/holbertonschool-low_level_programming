@@ -7,10 +7,10 @@
 #define BUF_SIZE 1024
 
 /**
- * print_error - Prints an error message and exits
+ * print_error - Print error and exit
  * @code: Exit code
  * @format: Error message format
- * @arg: Argument to include in the message
+ * @arg: Message argument
  */
 void print_error(int code, const char *format, const char *arg)
 {
@@ -19,8 +19,8 @@ exit(code);
 }
 
 /**
- * close_fd - Closes a file descriptor with error checking
- * @fd: File descriptor to close
+ * close_fd - Close file descriptor
+ * @fd: File descriptor
  */
 void close_fd(int fd)
 {
@@ -32,11 +32,11 @@ exit(100);
 }
 
 /**
- * copy_file - Reads from one file and writes to another
- * @fd_from: Source file descriptor
- * @fd_to: Destination file descriptor
- * @file_from: Source filename for error messages
- * @file_to: Destination filename for error messages
+ * copy_file - Copy content from one file to another
+ * @fd_from: Source FD
+ * @fd_to: Destination FD
+ * @file_from: Source filename
+ * @file_to: Destination filename
  */
 void copy_file(int fd_from, int fd_to, const char *file_from, const char *file_to)
 {
@@ -54,10 +54,10 @@ print_error(98, "Error: Can't read from file %s\n", file_from);
 }
 
 /**
- * main - Entry point, copies content of one file to another
+ * main - Entry point
  * @ac: Argument count
  * @av: Argument vector
- * Return: 0 on success, exits with error codes otherwise
+ * Return: 0 on success
  */
 int main(int ac, char **av)
 {
